@@ -27,32 +27,26 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        angleSpeed: 20,
-        maxAngle: 30,
-        RopeSpeed: 0,
 
+        Claw:cc.Node,
     },
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad() {
-        this.rope = this.node.getChildByName('rope');
-        this.isDrop = false;
+    onLoad () {
+        //this.Claw = cc.find('Player/ClawAndRope');
+        this.Touch = this.Claw.getComponent('Claw');
+        this.node.on(cc.Node.EventType.TOUCH_START,this.onTouchStart
+        ,this)
     },
 
-    start() {
+    start () {
 
     },
 
-    update(dt) {
+    // update (dt) {},
 
-        this.node.rotation += this.angleSpeed * dt;
-        if (this.node.rotation >= this.maxAngle || this.node.rotation <= -this.maxAngle) {
-            this.angleSpeed = -this.angleSpeed;
-        }
-        
-        if (this.isDrop) {
-            this.rope.height += this.RopeSpeed * dt;
-        }
-    },
+    onTouchStart(){
+           this.Touch.isDrop=true;
+    }
 });
